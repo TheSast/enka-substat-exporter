@@ -24,16 +24,16 @@ pub(crate) fn parse_csv_to_map(file_path: &str) -> HashMap<String, Vec<GameStat>
         let columns: Vec<&str> = line.split(',').collect();
         if columns.len() < 11 {
             continue;
-        } // Ensure there are enough columns
+        }
 
-        let character = columns[11].trim().to_string();
+        let character = columns[0].trim().to_string();
         if character.is_empty() {
             continue;
         }
 
         let mut stats = Vec::new();
         for (i, &stat) in headers.iter().enumerate() {
-            if let Some(&value) = columns.get(17 + i) {
+            if let Some(&value) = columns.get(i + 1) {
                 if value.trim() == "TRUE" {
                     stats.push(stat);
                 }
