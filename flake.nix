@@ -32,27 +32,12 @@
           pkgs.mkShell.override {
             stdenv = pkgs.clangStdenv;
           } {
-            packages = with pkgs;
-              [
-                taplo-lsp
-                cargo-edit
-                # cargo-script absent?
-                (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
-              ]
-              ++ [
-                perl
-                pkg-config
-                gnumake
-                gcc
-              ]
-              ++ [
-                openssl
-              ];
-
-            shellHook = ''
-              export OPENSSL_DIR=${pkgs.openssl.dev}
-              export PKG_CONFIG_PATH=${pkgs.openssl.bin}/pkgconfig
-            '';
+            packages = with pkgs; [
+              taplo-lsp
+              cargo-edit
+              # cargo-script absent?
+              (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
+            ];
           };
       }
     );
